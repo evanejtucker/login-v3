@@ -5,4 +5,12 @@ body {
 #loginBox {
     margin-top: 30%;
     background: whitesmoke;
+    border: 2.5px solid;
+    border-radius: 25px;
+}
+
+#modal1 {
+    border: 2.5px solid;
+    border-radius: 25px;
+    overflow: hidden;
 }

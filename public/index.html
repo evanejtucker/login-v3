@@ -25,22 +25,46 @@
               <div class="row">
                   <div class="input-field col s12">
                       <input id="username" type="text" class="validate">
-                      <label for="username">usernamer</label>
+                      <label for="username">username</label>
                   </div>
                   <div class="input-field col s12">
                       <input id="password" type="password" class="validate">
                       <label for="password">Password</label>
                   </div>
-                  <div class="col s6">
+                  <div class="col s12">
                       <a class="waves-effect waves-light btn">submit</a>
-                    </div>
+                      <p><a class="modal-trigger" href="#modal1">Create Account</a></p>
+                  </div>
               </div>
-            </form>
-            
+            </form>        
           </div>
         </div>
     
     </div>
+
+  <!-- Modal Structure -->
+  <div id="modal1" class="modal">
+    <div class="modal-content">
+        <form class="col s12">
+            <h4>Create Account</h3>
+            <div class="row">
+                <div class="input-field col s12">
+                    <input id="newUsername" type="text" class="validate">
+                    <label for="newUsername">usernamer</label>
+                </div>
+                <div class="input-field col s12">
+                    <input id="newPassword" type="text" class="validate">
+                    <label for="newPassword">Password</label>
+                </div>
+                <div class="input-field col s12">
+                    <input id="confirmNewPassword" type="password" class="validate">
+                    <label for="confirmNewPassword"> Confirm Password</label>
+                </div>
+                <a class="waves-effect waves-light btn">submit</a>
+            </div>     
+          </form>
+    </div>
+  </div>
 
 <!-- JQuery -->
 <script
