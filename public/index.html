@@ -7,17 +7,40 @@
     <!-- Compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
     <!-- style sheet -->
-    <link rel="stylesheet" href="./assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/style.css">
     <!-- favIcon -->
     <link rel="icon" href="assets/images/keyIcon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 
   </head>
   <body>
 
-        <div class="container">
-            <h1>Login App</h1>
+    <div class="container">
+
+        <div class="row">
+          <div class="col m4 offset-m4 s12" id="loginBox">
+            <form class="col s12">
+              <h4>Login</h3>
+              <div class="row">
+                  <div class="input-field col s12">
+                      <input id="username" type="text" class="validate">
+                      <label for="username">usernamer</label>
+                  </div>
+                  <div class="input-field col s12">
+                      <input id="password" type="password" class="validate">
+                      <label for="password">Password</label>
+                  </div>
+                  <div class="col s6">
+                      <a class="waves-effect waves-light btn">submit</a>
+                    </div>
+              </div>
+            </form>
+            
+          </div>
         </div>
+    
+    </div>
 
 <!-- JQuery -->
 <script
@@ -28,7 +51,7 @@
 <!-- Materialize Compiled and minified JavaScript -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
 <!-- Javascript link -->
-<script src="./assets/javscripts/script.js"></script>
+<script src="assets/javascript/script.js"></script>
 
   </body>
 </html>

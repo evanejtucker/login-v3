@@ -1,0 +1,23 @@
+{
+  "name": "login-v3",
+  "version": "1.0.0",
+  "description": "3rd attempt at log in app",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/evanejtucker/login-v3.git"
+  },
+  "author": "Evan E J Tucker",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/evanejtucker/login-v3/issues"
+  },
+  "homepage": "https://github.com/evanejtucker/login-v3#readme",
+  "dependencies": {
+    "express": "^4.16.2"
+  }
+}
