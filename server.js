@@ -8,7 +8,7 @@ const mongoose = require('mongoose');
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(express.static('public'));
-app.use(morgan('dev'));
+app.use(morgan('tiny'));
 
 mongoose.connect('mongodb://localhost/login', { useMongoClient: true });
 mongoose.Promise = global.Promise;
@@ -21,6 +21,18 @@ db.once('open', function() {
 app.get('/', (req, res, next) => {
     res.sendFile('public/index.html');
 });
+
+app.post('/submit', (req, res, next)=> {
+    let userInfo = req.body;
+    console.log(userInfo);
+    res.status(200).send(userInfo);
+});
+
+app.post('/newUser', (req, res, next)=> {
+    let newUser = req.body;
+    console.log(newUser);
+    res.status(200).send(newUser);
+})
 
 app.listen(port, ()=> {
     console.log("App listening on port: " + port);
