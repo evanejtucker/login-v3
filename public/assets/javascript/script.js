@@ -15,7 +15,7 @@ $(document).ready(()=> {
         let inputConfirmPassword = $('#confirmNewPassword').val().trim();
         let inputNewUsername = $('#newUsername').val().trim();
 
-        if(inputPassword === inputConfirmPassword  || !inputNewUsername) {
+        if(inputNewPassword === inputConfirmPassword  || !inputNewUsername) {
             let newUserInfo = {
                 newUsername: inputNewUsername,
                 newPassword: inputConfirmPassword
