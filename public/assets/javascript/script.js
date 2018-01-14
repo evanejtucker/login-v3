@@ -49,7 +49,7 @@ $(document).ready(()=> {
     
             $.ajax({
                 type: 'post',
-                url: '/submit',
+                url: '/submitUser',
                 data: user
             }).done((response)=>{
                 console.log(response);

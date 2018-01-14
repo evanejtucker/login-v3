@@ -5,14 +5,24 @@ const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const mongoose = require('mongoose');
 const User = require('./models/User.js');
-const cookieParser = require('cookie-parser')
-var session = require('express-session')
+const cookieParser = require('cookie-parser');
+const session = require('express-session');
+const passport = require('passport');
+const LocalStrategy = require('passport-local').Strategy;
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(express.static('public'));
 app.use(morgan('tiny'));
 app.use(cookieParser());
+app.use(session({
+    secret: 'keyboard cat',
+    resave: false,
+    saveUninitialized: true,
+    cookie: { secure: true }
+  }));
+app.use(passport.initialize());
+app.use(passport.session());
 
 mongoose.connect('mongodb://localhost/login', { useMongoClient: true });
 mongoose.Promise = global.Promise;
@@ -26,10 +36,17 @@ app.get('/', (req, res, next) => {
     res.sendFile('public/index.html');
 });
 
-app.post('/submit', (req, res, next)=> {
+app.post('/submitUser', (req, res, next)=> {
     let userInfo = req.body;
     console.log(userInfo);
-    res.status(200).send(userInfo);
+    User.findOne({username: userInfo.username}, function(error, user) {
+        if(user) {
+            res.redirect('/profile')
+            return console.log("User exists!");
+        } else {
+            return console.log('no user found');
+        }
+    });
 });
 
 app.post('/newUser', (req, res, next)=> {
@@ -56,6 +73,10 @@ app.get('/allUsers', (req, res, next)=> {
         res.send(user);
         console.log(user);
     });
+});
+
+app.get('/profile', (req, res, next)=> {
+    res.send("user recognized");
 });
 
 app.listen(port, ()=> {
