@@ -6,8 +6,7 @@ const morgan = require('morgan');
 const mongoose = require('mongoose');
 const User = require('./models/User.js');
 const cookieParser = require('cookie-parser')
-const session = require('express-sessions');
-
+var session = require('express-session')
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -22,14 +21,6 @@ db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function() {
   console.log("connected to db");
 });
-
-app.use(express.session({
-    secret: 'a4f8071f-c873-4447-8ee2',
-    cookie: { maxAge: 2628000000 },
-    store: new (require('express-sessions'))({
-        storage: 'mongodb',
-    })
-}));
 
 app.get('/', (req, res, next) => {
     res.sendFile('public/index.html');
@@ -48,9 +39,7 @@ app.post('/newUser', (req, res, next)=> {
     let newUser = new User({username: newUserInfo.newUsername, password: newUserInfo.newPassword});
     User.findOne({username: newUser.username}, function(error, user) {
         if(user) {
-            // return console.log("user already exists");
-            req.flash();
-            return
+            return console.log("user already exists");
         } else {
             newUser.save((err)=> {
                 // console.log(newUser);
