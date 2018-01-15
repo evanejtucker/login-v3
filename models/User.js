@@ -17,6 +17,14 @@ var UserSchema = new Schema({
   }
 });
 
+UserSchema.methods.comparePassword = (user, password)=> {
+  if (user.password === password) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
 var User = mongoose.model("User", UserSchema);
 
 module.exports = User;

@@ -50,8 +50,16 @@ passport.use(new LocalStrategy(
             console.log("no user found");
             return done(null, false); 
         }
-        if(user) {console.log(user)}
-        return done(null, user);
+        if(user) {
+            console.log(user);
+            if(user.password === password) {
+                console.log("password corect");
+                return done(null, user);
+            } else {
+                console.log('password Incorrect');
+                return done(null, false);
+            }
+        }
       });
   }
 ));
