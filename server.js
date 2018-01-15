@@ -19,7 +19,7 @@ app.use(session({
     secret: 'keyboard cat',
     resave: false,
     saveUninitialized: true,
-    cookie: { secure: true }
+    // cookie: { secure: true }
   }));
 app.use(passport.initialize());
 app.use(passport.session());
@@ -41,6 +41,28 @@ passport.deserializeUser(function(id, done) {
       done(err, user);
     });
 });
+
+function checkAuthentication(req,res,next){
+    if(req.isAuthenticated()){
+        //if user is looged in, req.isAuthenticated() will return true 
+        console.log('user authenticated');
+        next();
+    } else{
+        console.log("user not authenticated");
+        res.redirect("/failure");
+    }
+}
+
+const logoutUser = (req,res,next)=> {
+    if(req.isAuthenticated()){
+        req.logout();
+        console.log('user logged out');
+        next();
+    } else {
+        console.log('user not logged in');
+        next();
+    }
+}
 
 passport.use(new LocalStrategy(
   function(username, password, done) {
@@ -125,12 +147,16 @@ app.get('/allUsers', (req, res, next)=> {
     });
 });
 
-app.get('/profile', (req, res, next)=> {
+app.get('/profile', checkAuthentication, (req, res, next)=> {
     res.send("user recognized");
 });
 
 app.get('/failure', (req, res, next)=> {
     res.send("you failed");
+});
+
+app.get('/logout', logoutUser, (req, res, next)=> {
+    res.redirect('/');
 });
 
 app.listen(port, ()=> {
