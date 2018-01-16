@@ -33,14 +33,10 @@ $(document).ready(()=> {
         });
     }
 
-    const submitModal = ()=> {
-        $("#modal1").modal("close");
-    }
-
 // Main Process
 // ----------------------------------------------------------------------------------------------------
 
     confirmPassword();
-    // $("#createBtn").on("click", submitModal);
+
 
 });

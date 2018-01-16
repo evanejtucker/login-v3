@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const port = process.env.PORT || 3000;
 const bodyParser = require('body-parser');
+const path = require('path');
 const morgan = require('morgan');
 const mongoose = require('mongoose');
 const User = require('./models/User.js');
@@ -9,12 +10,14 @@ const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
+const flash = require('connect-flash');
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(express.static('public'));
 app.use(morgan('tiny'));
 app.use(cookieParser());
+app.use(flash());
 app.use(session({
     secret: 'keyboard cat',
     resave: false,
@@ -69,12 +72,11 @@ passport.use(new LocalStrategy(
         if (err) { return console.log(err); }
         if (!user) {
             console.log("no user found");
-            return done(null, false); 
+            return done(null, false, { message: 'no user found.' }); 
         }
         if(user) {
-            console.log(user);
             if(user.password === password) {
-                console.log("password corect");
+                console.log("password correct");
                 return done(null, user);
             } else {
                 console.log('password Incorrect');
@@ -128,11 +130,13 @@ app.get('/allUsers', (req, res, next)=> {
 });
 
 app.get('/profile', checkAuthentication, (req, res, next)=> {
-    res.send("user recognized");
+    res.sendFile('/profile.html', { root: path.join(__dirname, 'public') });
 });
 
 app.get('/failure', (req, res, next)=> {
-    res.send("you failed");
+    console.log("somethng went wrong");
+    req.flash('info', 'something went wrong');
+    res.redirect('/');
 });
 
 app.get('/logout', logoutUser, (req, res, next)=> {
