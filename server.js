@@ -19,7 +19,6 @@ app.use(session({
     secret: 'keyboard cat',
     resave: false,
     saveUninitialized: true,
-    // cookie: { secure: true }
   }));
 app.use(passport.initialize());
 app.use(passport.session());
@@ -90,30 +89,11 @@ app.get('/', (req, res, next) => {
     res.sendFile('public/index.html');
 });
 
-// app.post('/submitUser', (req, res, next)=> {
-//     let userInfo = req.body;
-//     console.log(userInfo);
-//     User.findOne({username: userInfo.username}, function(error, user) {
-//         if(user) {
-//             res.redirect('/profile')
-//             return console.log("User exists!");
-//         } else {
-//             return console.log('no user found');
-//         }
-//     });
-// });
-
 app.post('/submitUser', 
   passport.authenticate('local', { failureRedirect: '/failure' }),
   function(req, res) {
     res.redirect('/profile');
 });
-
-// app.post('/login', 
-//   passport.authenticate('local', { failureRedirect: '/failure' }),
-//   function(req, res) {
-//     res.redirect('/profile');
-// });
 
 app.post('/login',
   passport.authenticate('local', { successRedirect: '/profile',
@@ -131,7 +111,6 @@ app.post('/newUser', (req, res, next)=> {
             return console.log("user already exists");
         } else {
             newUser.save((err)=> {
-                // console.log(newUser);
                 if (err) return console.log(err);
                 console.log("user saved successfully!");
             });

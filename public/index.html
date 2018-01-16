@@ -20,23 +20,6 @@
 
         <div class="row">
           <div class="col m4 offset-m4 s12" id="loginBox">
-            <!-- <form class="col s12">
-              <h4>Login</h3>
-              <div class="row">
-                  <div class="input-field col s12">
-                      <input id="username" type="text" class="validate">
-                      <label for="username">username</label>
-                  </div>
-                  <div class="input-field col s12">
-                      <input id="password" type="password" class="validate">
-                      <label for="password">Password</label>
-                  </div>
-                  <div class="col s12">
-                      <a class="waves-effect waves-light btn" id="submitUser">submit</a>
-                      <p><a class="modal-trigger" href="#modal1">Create Account</a></p>
-                  </div>
-              </div>
-            </form>         -->
             <form action="/login" method="post">
                 <div>
                     <label>Username:</label>
@@ -47,9 +30,10 @@
                     <input type="password" name="password"/>
                 </div>
                 <div>
-                    <input type="submit" value="Log In"/>
+                    <input type="submit" value="Log In" id="loginBtn"/>
                 </div>
             </form>
+            <p><a class="modal-trigger" href="#modal1">Create new account</a></p>          
           </div>
         </div>
     
@@ -58,7 +42,7 @@
   <!-- Modal Structure -->
   <div id="modal1" class="modal">
     <div class="modal-content">
-        <form class="col s12">
+        <!-- <form class="col s12">
             <h4>Create Account</h3>
             <div class="row">
                 <div class="input-field col s12">
@@ -75,7 +59,25 @@
                 </div>
                 <a class="waves-effect waves-light btn" id="submitNewUser">submit</a>
             </div>     
-          </form>
+          </form> -->
+        <form action="/login" method="post">
+            <div>
+                <label>Username:</label>
+                <input type="text" name="newUsername"/>
+            </div>
+            <div>
+                <label>Password:</label>
+                <input type="password" name="newPassword" id="pswrd"/>
+            </div>
+            <div>
+                <label>Confirm Password:</label>
+                <input type="password" name="confirmNewPassword" id="confirmPswrd"/>
+            </div>
+            <div>
+                <input class="waves-effect waves-light btn" type="submit" value="Create" id="createBtn"/>
+            </div>
+        </form>
+
     </div>
   </div>
 

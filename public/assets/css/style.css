@@ -7,10 +7,20 @@ body {
     background: whitesmoke;
     border: 2.5px solid;
     border-radius: 25px;
+    padding-top: 5px;
+    padding-bottom: 5px;
 }
+
+/* #loginBtn {
+
+} */
 
 #modal1 {
     border: 2.5px solid;
     border-radius: 25px;
     overflow: hidden;
+}
+
+.disabled {
+    
 }
