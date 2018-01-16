@@ -8,32 +8,6 @@ $(document).ready(()=> {
 // Functions
 // ----------------------------------------------------------------------------------------------------
 
-    // create new user
-    // const createUser = ()=> {
-
-    //     let inputNewPassword = $('#newPassword').val().trim();
-    //     let inputConfirmPassword = $('#confirmNewPassword').val().trim();
-    //     let inputNewUsername = $('#newUsername').val().trim();
-
-    //     if(inputNewPassword === inputConfirmPassword  || !inputNewUsername) {
-    //         let newUserInfo = {
-    //             newUsername: inputNewUsername,
-    //             newPassword: inputConfirmPassword
-    //         }
-    
-    //         $.ajax({
-    //             type: 'post',
-    //             url: '/newUser',
-    //             data: newUserInfo
-    //         }).done((response)=>{
-    //             console.log(response);
-    //         });
-    //     } else {
-    //         console.log('passswords dont match');
-    //     }
-     
-    // }
-
     const disableButton = (button)=> {
         // $(button).attr('disabled','disabled');
         // document.getElementById("createBtn").disabled = true;
@@ -57,13 +31,16 @@ $(document).ready(()=> {
                 console.log("passowrds match!");
             }
         });
+    }
 
-
+    const submitModal = ()=> {
+        $("#modal1").modal("close");
     }
 
 // Main Process
 // ----------------------------------------------------------------------------------------------------
 
-confirmPassword();
+    confirmPassword();
+    // $("#createBtn").on("click", submitModal);
 
 });

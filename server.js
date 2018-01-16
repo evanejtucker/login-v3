@@ -102,20 +102,21 @@ app.post('/login',
 );
 
 app.post('/newUser', (req, res, next)=> {
-    let newUserInfo = req.body;
-    console.log(newUserInfo);
-    res.status(200).send(newUserInfo);
-    let newUser = new User({username: newUserInfo.newUsername, password: newUserInfo.newPassword});
-    User.findOne({username: newUser.username}, function(error, user) {
-        if(user) {
-            return console.log("user already exists");
+    let info = req.body;
+    console.log(info);
+    User.findOne({username: info.newUsername}, (err, user)=> {
+        if (user) {
+            res.send('user already exists');
         } else {
-            newUser.save((err)=> {
-                if (err) return console.log(err);
-                console.log("user saved successfully!");
+            let newUser = new User({username: info.newUsername, password: info.confirmNewPassword});
+            newUser.save((error)=> {
+                if (error) return console.log(error);
+                console.log('user saved successfully');
             });
+            // res.send(newUser);
+            res.redirect('/');
         }
-    });
+    })
 });
 
 app.get('/allUsers', (req, res, next)=> {
