@@ -74,13 +74,13 @@ passport.use(new LocalStrategy(
             console.log("no user found");
             return done(null, false, { message: 'no user found.' }); 
         }
-        if(user) {
-            if(user.password === password) {
+        if (user) {
+            if(user.validPassword(password, user.password)) {
                 console.log("password correct");
                 return done(null, user);
             } else {
-                console.log('password Incorrect');
-                return done(null, false);
+                console.log('password incorrect');
+                return done(null, false); 
             }
         }
       });
@@ -110,7 +110,13 @@ app.post('/newUser', (req, res, next)=> {
         if (user) {
             res.send('user already exists');
         } else {
-            let newUser = new User({username: info.newUsername, password: info.confirmNewPassword});
+
+            let newUser = new User({
+                username: info.newUsername, 
+                password: info.confirmNewPassword
+            });
+            newUser.password = newUser.generateHash(info.confirmNewPassword);
+            console.log(newUser);
             newUser.save((error)=> {
                 if (error) return console.log(error);
                 console.log('user saved successfully');
